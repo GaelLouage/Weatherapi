@@ -1,4 +1,6 @@
-﻿using Infrastructuur.Entities;
+﻿using Infrastructuur.Data.Interfaces;
+using Infrastructuur.Dtos;
+using Infrastructuur.Entities;
 using Infrastructuur.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
@@ -10,70 +12,38 @@ namespace WeatherApi.Controllers
     [Route("api/[controller]")]
     public class WeatherController : ControllerBase
     {
-        // your api key
-        private readonly string apiKey = ApiKeyReader.KeyReader(@"C:/Users/louag/source/repos/keyWeatherforecast/WeatherForecastKey.json").Key;
-        private readonly string baseUrl = "https://api.openweathermap.org/data/2.5";
+        private readonly IWeaterData _weatherData;
         private readonly IMemoryCache _cache;
 
-        public WeatherController(IMemoryCache cache)
+        public WeatherController(IMemoryCache cache, IWeaterData weatherData)
         {
-            this._cache = cache;
+            _cache = cache;
+            _weatherData = weatherData;
         }
-
+       
         [HttpGet("current/{city}")]
-        public async Task<ActionResult<CurrentWeatherResponse>> GetCurrentWeather(string city)
+        public async Task<ActionResult<ResultDto<ForecastWeatherResponse>>> GetCurrentWeatherByName(string city)
         {
-            string cacheKey = $"weather-{city}";
-            if (_cache.TryGetValue(cacheKey, out CurrentWeatherResponse cachedResult))
+            string cacheKey = $"current-{city}";
+            if (_cache.TryGetValue(cacheKey, out ResultDto<CurrentWeatherResponse> cachedResult))
             {
                 return Ok(cachedResult);
             }
-
-            string url = $"{baseUrl}/weather?q={city}&appid={apiKey}&units=metric";
-            using (HttpClient client = new HttpClient())
-            {
-                HttpResponseMessage response = await client.GetAsync(url);
-                if (response.IsSuccessStatusCode)
-                {
-                    string json = await response.Content.ReadAsStringAsync();
-                    CurrentWeatherResponse result = JsonConvert.DeserializeObject<CurrentWeatherResponse>(json);
-                    // cache lives for 10 minutes
-                    _cache.Set(cacheKey, result, TimeSpan.FromMinutes(10));
-                    return Ok(result);
-                }
-                else
-                {
-                    return NotFound();
-                }
-            }
+            var weather = await _weatherData.GetCurrentWeatherByCity(city);
+            _cache.Set(cacheKey, weather, TimeSpan.FromMinutes(10));
+            return Ok(weather);
         }
         [HttpGet("forecast/{city}")]
-        public async Task<ActionResult<ForecastWeatherResponse>> GetForecastWeather(string city)
+        public async Task<ActionResult<ForecastWeatherResponse>> GetSevenDaysForecastWeatherByCity(string city)
         {
-            if (_cache.TryGetValue(city, out ForecastWeatherResponse cachedResponse))
+            string cacheKey = $"forecast-{city}";
+            if (_cache.TryGetValue(cacheKey, out ResultDto<ForecastWeatherResponse> cachedResult))
             {
-                return Ok(cachedResponse);
+                return Ok(cachedResult);
             }
-            else
-            {
-                string url = $"{baseUrl}/forecast?q={city}&appid={apiKey}&units=metric";
-                using (HttpClient client = new HttpClient())
-                {
-                    HttpResponseMessage response = await client.GetAsync(url);
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string json = await response.Content.ReadAsStringAsync();
-                        ForecastWeatherResponse result = JsonConvert.DeserializeObject<ForecastWeatherResponse>(json);
-                        // cache lives for 10 minutes
-                        _cache.Set(city, result, TimeSpan.FromMinutes(10));
-                        return Ok(result);
-                    }
-                    else
-                    {
-                        return NotFound();
-                    }
-                }
-            }
+            var weather = await _weatherData.GetSevenDaysForecastWeather(city);
+            _cache.Set(cacheKey, weather, TimeSpan.FromMinutes(10));
+            return Ok(weather);
         }
     }
 }

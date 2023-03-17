@@ -1,3 +1,5 @@
+using Infrastructuur.Data.Classes;
+using Infrastructuur.Data.Interfaces;
 using Microsoft.Extensions.Caching.Memory;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IMemoryCache, MemoryCache>();
+builder.Services.AddScoped<IWeaterData, WeatherData>();
 
 var app = builder.Build();
 

@@ -1,7 +1,7 @@
 using Infrastructuur.Data.Classes;
 using Infrastructuur.Data.Interfaces;
 using Microsoft.Extensions.Caching.Memory;
-
+using Infrastructuur.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -10,8 +10,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<IMemoryCache, MemoryCache>();
-builder.Services.AddScoped<IWeaterData, WeatherData>();
+
+builder.Services.ConfigureServicesExtensions();
 
 var app = builder.Build();
 

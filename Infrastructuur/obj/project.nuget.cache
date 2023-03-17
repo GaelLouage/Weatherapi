@@ -1,10 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "XctuT/RsSPmfsZbp2epnGlMj6EUUbBNMzxZ6BkWq6DfCg6KEWirt4K+qEbzdvuK6oHlsvOt7tc0c2As09pNCmg==",
+  "dgSpecHash": "USIJmI5FgubzP2ncB+MJAJxT5mItJ0ghNLUph7itC/J+cu5hJdl1pYo/LVRwAyrYB6Czo5YDZmM7yLImcLamjg==",
   "success": true,
   "projectFilePath": "C:\\Users\\louag\\source\\repos\\WeatherApi\\Infrastructuur\\Infrastructuur.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\louag\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\7.0.0\\microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\louag\\.nuget\\packages\\microsoft.extensions.caching.memory\\7.0.0\\microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",
+    "C:\\Users\\louag\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\louag\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.0\\microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\louag\\.nuget\\packages\\microsoft.extensions.options\\7.0.0\\microsoft.extensions.options.7.0.0.nupkg.sha512",
     "C:\\Users\\louag\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
     "C:\\Users\\louag\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\louag\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"

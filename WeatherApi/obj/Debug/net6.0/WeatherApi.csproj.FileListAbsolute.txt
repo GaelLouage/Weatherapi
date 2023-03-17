@@ -35,3 +35,7 @@ C:\Users\louag\source\repos\WeatherApi\WeatherApi\obj\Debug\net6.0\WeatherApi.ge
 C:\Users\louag\source\repos\WeatherApi\WeatherApi\obj\Debug\net6.0\ref\WeatherApi.dll
 C:\Users\louag\source\repos\WeatherApi\WeatherApi\bin\Debug\net6.0\Microsoft.Extensions.Caching.Abstractions.dll
 C:\Users\louag\source\repos\WeatherApi\WeatherApi\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+C:\Users\louag\source\repos\WeatherApi\WeatherApi\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\louag\source\repos\WeatherApi\WeatherApi\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\louag\source\repos\WeatherApi\WeatherApi\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\louag\source\repos\WeatherApi\WeatherApi\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
